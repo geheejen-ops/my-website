@@ -1,0 +1,26 @@
+body {
+    background-color: #1a1a1a;
+    color: white;
+    font-family: sans-serif;
+    text-align: center;
+    padding-top: 50px;
+}
+
+h1 {
+    color: #00ff41;
+}
+
+button {
+    background-color: #00ff41;
+    color: #1a1a1a;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 30px; /* Це загальний відступ для кнопки */
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #00cc33;
+}
