@@ -2,20 +2,34 @@
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <title>Мій перший сайт</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мій сайт</title>
+    <!-- Підключаємо шрифт Roboto з Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Привіт! Це мій сайт, який я пишу сам!</h1>
-    <p>Ласкаво просимо на мою сторінку.</p>
-    <button onclick="sayHello()">Натисни мене!</button>
-<script>
-    function sayHello() {
-        alert("Привіт! Це мій перший інтерактивний сайт!");
-    }
-</script>
-<footer>
-    <p>© 2026 Pavlo Pak | Розроблено мною</p>
-</footer>
+    <div class="container">
+        <h1>Привіт! Це мій оновлений сайт</h1>
+        <p>Ласкаво просимо! Я вчуся програмувати.</p>
+        
+        <!-- Кнопка для теми та привітання -->
+        <button onclick="toggleTheme()">Змінити тему</button>
+        <button onclick="sayHello()">Привіт!</button>
+    </div>
+
+    <footer>
+        <p>© 2026 Pavlo Pak | Розроблено мною</p>
+    </footer>
+
+    <script>
+        function sayHello() {
+            alert("Привіт! Це мій перший інтерактивний сайт!");
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle("dark-mode");
+        }
+    </script>
 </body>
 </html>

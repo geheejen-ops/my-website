@@ -1,35 +1,30 @@
 body {
-    background-color: #1a1a1a;
-    color: white;
-    font-family: sans-serif;
+    font-family: 'Roboto', sans-serif; /* Тепер у нас сучасний шрифт */
+    transition: background 0.3s, color 0.3s; /* Плавна зміна кольорів */
+    padding: 20px;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
     text-align: center;
-    padding-top: 50px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 15px; /* Заокруглені кути для картки */
 }
 
-h1 {
-    color: #00ff41;
+/* Темна тема */
+.dark-mode {
+    background-color: #121212;
+    color: white;
 }
 
-button {
-    background-color: #00ff41;
-    color: #1a1a1a;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 30px; /* Це загальний відступ для кнопки */
-    border-radius: 5px;
+.dark-mode .container {
+    border-color: #333;
 }
 
-button:hover {
-    background-color: #00cc33;
-}
-/* Стиль для футера */
 footer {
-    margin-top: 50px;       /* Робимо відступ зверху, щоб кнопка не торкалася футера */
-    padding: 20px;          /* Додаємо трохи простору всередині */
-    text-align: center;     /* Текст буде по центру */
-    font-size: 14px;        /* Трішки зробимо текст чіткішим */
-    color: #555;            /* Сірий колір, щоб він не відволікав від головного */
-    border-top: 1px solid #ccc; /* Додамо тонку лінію зверху для краси */
+    margin-top: 50px;
+    text-align: center;
+    color: #666;
 }
