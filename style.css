@@ -27,4 +27,9 @@ footer {
     margin-top: 50px;
     text-align: center;
     color: #666;
+}/* Додай це у кінець свого style.css */
+button {
+    margin: 10px;        /* Відступ між кнопками */
+    padding: 10px 20px;  /* Зробить кнопки більшими та зручнішими */
+    cursor: pointer;     /* Курсор стає як рука, коли наводиш */
 }
