@@ -44,3 +44,30 @@ body {
     background: #22d3ee;
     color: white;
 }
+.gallery { 
+    max-width: 900px; /* Обмежуємо ширину галереї */
+    margin: 50px auto; /* Центруємо її */
+}
+/* Робимо галерею акуратною та центрованою */
+.gallery { 
+    max-width: 900px; 
+    margin: 50px auto; 
+    padding: 0 20px;
+}
+
+/* Додаємо стиль для кнопок, щоб вони були схожі */
+.btn-link {
+    background-color: #22d3ee;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    transition: 0.3s;
+}
+
+.btn-link:hover {
+    background-color: #0ea5e9;
+    transform: scale(1.05);
+}
