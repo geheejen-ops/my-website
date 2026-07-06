@@ -3,32 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мій сайт</title>
-    <!-- Підключаємо шрифт Roboto з Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <title>Pavlo Pak | Digital Hub</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Привіт! Це мій оновлений сайт</h1>
-        <p>Ласкаво просимо! Я вчуся програмувати.</p>
+
+    <div class="card">
+        <h1>Павло Пак</h1>
+        <p>Геймер & Розробник</p>
         
-        <!-- Кнопка для теми та привітання -->
-        <button onclick="toggleTheme()">Змінити тему</button>
-        <button onclick="sayHello()">Привіт!</button>
+        <div class="buttons">
+            <button onclick="toggleTheme()">Темна тема 🌙</button>
+            <a href="https://youtube.com" class="btn-link">Мій YouTube</a>
+        </div>
     </div>
 
-    <footer>
-        <p>© 2026 Pavlo Pak | Розроблено мною</p>
-    </footer>
+    <section class="gallery">
+        <h2>Мої роботи</h2>
+        <div class="project-grid">
+            <div class="project-card">Проєкт 1</div>
+            <div class="project-card">Проєкт 2</div>
+            <div class="project-card">Проєкт 3</div>
+        </div>
+    </section>
 
     <script>
-        function sayHello() {
-            alert("Привіт! Це мій перший інтерактивний сайт!");
-        }
-
-        function toggleTheme() {
-            document.body.classList.toggle("dark-mode");
+        function toggleTheme() { 
+            document.body.classList.toggle("dark-mode"); 
         }
     </script>
 </body>

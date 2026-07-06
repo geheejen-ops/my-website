@@ -1,35 +1,46 @@
 body {
-    font-family: 'Roboto', sans-serif; /* Тепер у нас сучасний шрифт */
-    transition: background 0.3s, color 0.3s; /* Плавна зміна кольорів */
+    font-family: sans-serif;
+    background-color: #f4f4f9;
+    transition: 0.5s;
+    margin: 0;
     padding: 20px;
 }
 
-.container {
-    max-width: 600px;
+.dark-mode { background-color: #1a1a1a; color: #fff; }
+
+.card {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    text-align: center;
+    max-width: 400px;
     margin: auto;
-    text-align: center;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 15px; /* Заокруглені кути для картки */
 }
 
-/* Темна тема */
-.dark-mode {
-    background-color: #121212;
+.dark-mode .card { background: #2d2d2d; }
+
+.gallery { margin-top: 50px; text-align: center; }
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.project-card {
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.dark-mode .project-card { background: #333; }
+
+.project-card:hover {
+    transform: translateY(-10px);
+    background: #22d3ee;
     color: white;
-}
-
-.dark-mode .container {
-    border-color: #333;
-}
-
-footer {
-    margin-top: 50px;
-    text-align: center;
-    color: #666;
-}/* Додай це у кінець свого style.css */
-button {
-    margin: 10px;        /* Відступ між кнопками */
-    padding: 10px 20px;  /* Зробить кнопки більшими та зручнішими */
-    cursor: pointer;     /* Курсор стає як рука, коли наводиш */
 }
