@@ -2,17 +2,48 @@
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <title>Вітаємо!</title>
+    <title>Особистий кабінет</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-        body { font-family: 'Arial', sans-serif; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; background-color: #eef2f3; }
-        .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; }
+        body { font-family: 'Segoe UI', sans-serif; background: #f4f7f6; margin: 0; display: flex; justify-content: center; padding-top: 50px; }
+        .card { background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 350px; text-align: center; }
+        h1 { color: #333; }
+        .user-email { background: #e7f3ff; color: #007bff; padding: 10px; border-radius: 8px; font-weight: bold; margin: 20px 0; }
+        button { width: 100%; padding: 12px; background-color: #dc3545; color: white; border: none; border-radius: 8px; cursor: pointer; transition: 0.3s; }
+        button:hover { background-color: #c82333; }
     </style>
 </head>
 <body>
+
     <div class="card">
-        <h1>🎉 Ласкаво просимо!</h1>
-        <p>Ви успішно зареєструвалися у нашому клубі.</p>
-        <p>Це ваш закритий контент.</p>
+        <h1>Ласкаво просимо!</h1>
+        <p>Ваш профіль:</p>
+        <div id="user-info" class="user-email">Завантаження...</div>
+        <button id="logout-btn">Вийти</button>
     </div>
+
+    <script>
+        // Підключення (використовуй ті ж дані, що і в signup.html)
+        const supabaseUrl = 'https://diimxykjkbwyeynjyill.supabase.co';
+        const supabaseKey = 'sb_publishable_PRDZd3BCgnLA9qytEtTXzA_FTa8_QgF';
+        const client = supabase.createClient(supabaseUrl, supabaseKey);
+
+        async function init() {
+            const { data: { user } } = await client.auth.getUser();
+            if (user) {
+                document.getElementById('user-info').innerText = user.email;
+            } else {
+                // Якщо користувач не залогінений — кидаємо на вхід
+                window.location.href = 'signup.html';
+            }
+        }
+
+        document.getElementById('logout-btn').addEventListener('click', async () => {
+            await client.auth.signOut();
+            window.location.href = 'signup.html';
+        });
+
+        init();
+    </script>
 </body>
 </html>
