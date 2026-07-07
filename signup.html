@@ -22,30 +22,30 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const supabaseUrl = 'https://diimxykjkbwyeynjyill.supabase.co';
-            const supabaseKey = 'sb_publishable_PRDZd3BCgnLA9qytEtTXzA_FTa8_QgF';
-            const client = supabase.createClient(supabaseUrl, supabaseKey);
+        const supabaseUrl = 'https://diimxykjkbwyeynjyill.supabase.co';
+        const supabaseKey = 'sb_publishable_PRDZd3BCgnLA9qytEtTXzA_FTa8_QgF';
+        const client = supabase.createClient(supabaseUrl, supabaseKey);
 
-            const btn = document.getElementById('signup-btn');
+        const btn = document.getElementById('signup-btn');
+        
+        btn.addEventListener('click', async () => {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
             
-            btn.addEventListener('click', async () => {
-                const email = document.getElementById('email').value;
-                const password = document.getElementById('password').value;
-                
-                const { data, error } = await client.auth.signUp({ 
-                    email: email, 
-                    password: password 
-                });
-                
-                if (error) {
-                    document.getElementById('status').innerText = "Помилка: " + error.message;
-                } else {
-                    // Перенаправлення після успішної реєстрації
-                    window.location.href = 'dashboard.html';
-                }
+            // Виконуємо реєстрацію
+            const { data, error } = await client.auth.signUp({ 
+                email: email, 
+                password: password 
             });
+            
+            // ОБРОБКА РЕЗУЛЬТАТУ:
+            if (error) {
+                document.getElementById('status').innerText = "Помилка: " + error.message;
+            } else {
+                // ПЕРЕНАПРАВЛЕННЯ СЮДИ, ЯКЩО ВСЕ ДОБРЕ
+                window.location.href = 'dashboard.html';
+            }
         });
     </script>
 </body>
-</html><p></p>
+</html>
