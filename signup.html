@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Реєстрація</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="card">
+        <h1>Створення акаунта</h1>
+        <input type="email" id="email" placeholder="Email">
+        <input type="password" id="password" placeholder="Пароль">
+        <button onclick="signUp()">Зареєструватися</button>
+        <p id="status"></p>
+    </div>
+
+    <script>
+        // ВСТАВ СЮДИ СВОЇ ДАНІ З SUPABASE
+        const supabaseUrl = 'https://diimxykjkbwyeynjyill.supabase.co'
+        const supabaseKey = 'sb_publishable_PRDZd3BCgnLA9qytEtTXzA_FTa8_QgF'
+        const supabase = supabase.createClient(supabaseUrl, supabaseKey)
+
+        async function signUp() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            const { data, error } = await supabase.auth.signUp({ email, password });
+            
+            if (error) {
+                document.getElementById('status').innerText = "Помилка: " + error.message;
+            } else {
+                document.getElementById('status').innerText = "Перевір пошту для підтвердження!";
+            }
+        }
+    </script>
+</body>
+</html>
