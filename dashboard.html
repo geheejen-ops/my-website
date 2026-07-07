@@ -2,36 +2,42 @@
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <title>Мій Кабінет</title>
+    <title>Твій профіль</title>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #f0f2f5; display: flex; justify-content: center; padding-top: 100px; }
+        body { font-family: 'Segoe UI', sans-serif; background: #f4f7f6; display: flex; justify-content: center; padding-top: 100px; }
         .card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 350px; text-align: center; }
-        .user-box { background: #f8f9fa; padding: 15px; border-radius: 10px; margin: 20px 0; color: #555; border: 1px solid #ddd; }
-        .btn-out { background: #e74c3c; color: white; padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; }
+        .user-email { background: #e7f3ff; color: #007bff; padding: 10px; border-radius: 8px; margin: 20px 0; font-weight: bold; }
+        button { background: #ff4d4d; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; }
     </style>
 </head>
 <body>
+
     <div class="card">
-        <h2>Вітаємо в клубі! 🎉</h2>
-        <div class="user-box" id="user-display">Завантаження...</div>
-        <button class="btn-out" id="logout">Вийти з системи</button>
+        <h1>Привіт! 🎉</h1>
+        <p>Ти увійшов у систему як:</p>
+        <div id="user-display" class="user-email">Завантаження...</div>
+        <button id="logout-btn">Вийти з акаунту</button>
     </div>
 
     <script>
         const client = supabase.createClient('https://diimxykjkbwyeynjyill.supabase.co', 'sb_publishable_PRDZd3BCgnLA9qytEtTXzA_FTa8_QgF');
         
-        async function checkUser() {
+        async function loadProfile() {
             const { data: { user } } = await client.auth.getUser();
-            if (!user) window.location.href = 'signup.html';
-            else document.getElementById('user-display').innerText = user.email;
+            if (user) {
+                document.getElementById('user-display').innerText = user.email;
+            } else {
+                window.location.href = 'index.html'; // Повертаємо на реєстрацію, якщо користувача немає
+            }
         }
 
-        document.getElementById('logout').onclick = async () => {
+        document.getElementById('logout-btn').onclick = async () => {
             await client.auth.signOut();
-            window.location.href = 'signup.html';
+            window.location.href = 'index.html';
         };
-        checkUser();
+
+        loadProfile();
     </script>
 </body>
 </html>
