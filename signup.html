@@ -16,28 +16,35 @@
     </div>
 
     <script>
+
+    // Цей код чекає, поки завантажиться весь HTML
+    document.addEventListener('DOMContentLoaded', () => {
         const supabaseUrl = 'https://diimxykjkbwyeynjyill.supabase.co';
         const supabaseKey = 'sb_publishable_PRDZd3BCgnLA9qytEtTXzA_FTa8_QgF';
         const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
-        // Використовуємо addEventListener замість onclick — це надійніше
-        document.getElementById('signup-btn').addEventListener('click', async () => {
+        const btn = document.getElementById('signup-btn');
+        
+        btn.addEventListener('click', async () => {
+            console.log("Кнопка натиснута!"); // Тепер це має спрацювати!
+            
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             
-            console.log("Починаємо реєстрацію...");
-
             const { data, error } = await supabase.auth.signUp({ 
                 email: email, 
                 password: password 
             });
             
             if (error) {
+                console.error("Помилка Supabase:", error);
                 document.getElementById('status').innerText = "Помилка: " + error.message;
             } else {
                 document.getElementById('status').innerText = "Перевір пошту для підтвердження!";
             }
         });
+    });
+</script>
     </script>
 </body>
 </html>
