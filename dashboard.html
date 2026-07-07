@@ -2,53 +2,36 @@
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <title>Особистий кабінет</title>
-    <!-- Підключаємо бібліотеку Supabase -->
+    <title>Мій Кабінет</title>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; background-color: #f4f7f6; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .card { background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 350px; text-align: center; }
-        h1 { color: #333; margin-bottom: 10px; }
-        .user-email { background: #e7f3ff; color: #007bff; padding: 10px; border-radius: 8px; font-weight: bold; margin: 20px 0; word-break: break-all; }
-        button { width: 100%; padding: 12px; background-color: #dc3545; color: white; border: none; border-radius: 8px; cursor: pointer; transition: 0.3s; font-size: 16px; }
-        button:hover { background-color: #c82333; }
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #f0f2f5; display: flex; justify-content: center; padding-top: 100px; }
+        .card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 350px; text-align: center; }
+        .user-box { background: #f8f9fa; padding: 15px; border-radius: 10px; margin: 20px 0; color: #555; border: 1px solid #ddd; }
+        .btn-out { background: #e74c3c; color: white; padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; }
     </style>
 </head>
 <body>
-
     <div class="card">
-        <h1>Ласкаво просимо!</h1>
-        <p>Ви успішно увійшли в систему.</p>
-        <div id="user-info" class="user-email">Завантаження...</div>
-        <button id="logout-btn">Вийти</button>
+        <h2>Вітаємо в клубі! 🎉</h2>
+        <div class="user-box" id="user-display">Завантаження...</div>
+        <button class="btn-out" id="logout">Вийти з системи</button>
     </div>
 
     <script>
-        // Ініціалізація Supabase (використовуємо ті ж самі ключі)
-        const supabaseUrl = 'https://diimxykjkbwyeynjyill.supabase.co';
-        const supabaseKey = 'sb_publishable_PRDZd3BCgnLA9qytEtTXzA_FTa8_QgF';
-        const client = supabase.createClient(supabaseUrl, supabaseKey);
-
-        async function init() {
-            // Перевіряємо, чи є активний користувач
+        const client = supabase.createClient('https://diimxykjkbwyeynjyill.supabase.co', 'sb_publishable_PRDZd3BCgnLA9qytEtTXzA_FTa8_QgF');
+        
+        async function checkUser() {
             const { data: { user } } = await client.auth.getUser();
-            
-            if (user) {
-                // Якщо є — показуємо його пошту
-                document.getElementById('user-info').innerText = user.email;
-            } else {
-                // Якщо немає — відправляємо назад на сторінку реєстрації
-                window.location.href = 'signup.html';
-            }
+            if (!user) window.location.href = 'signup.html';
+            else document.getElementById('user-display').innerText = user.email;
         }
 
-        // Логіка кнопки "Вийти"
-        document.getElementById('logout-btn').addEventListener('click', async () => {
+        document.getElementById('logout').onclick = async () => {
             await client.auth.signOut();
             window.location.href = 'signup.html';
-        });
-
-        init();
+        };
+        checkUser();
     </script>
 </body>
 </html>

@@ -2,50 +2,36 @@
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <title>Реєстрація</title>
+    <title>Вхід до Клубу</title>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f0f2f5; }
-        .card { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 300px; text-align: center; }
-        input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; }
-        button { width: 100%; padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 6px; cursor: pointer; }
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); height: 100vh; display: flex; align-items: center; justify-content: center; }
+        .card { background: white; padding: 40px; border-radius: 25px; box-shadow: 0 20px 40px rgba(0,0,0,0.2); width: 320px; text-align: center; }
+        h1 { color: #333; margin-bottom: 20px; }
+        input { width: 100%; padding: 12px; margin: 10px 0; border: 2px solid #eee; border-radius: 10px; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background: #764ba2; color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; margin-top: 10px; }
+        button:hover { background: #5a377d; }
+        #status { font-size: 14px; margin-top: 15px; color: #d9534f; }
     </style>
 </head>
 <body>
-
     <div class="card">
-        <h1>Створення акаунта</h1>
-        <input type="email" id="email" placeholder="Email">
-        <input type="password" id="password" placeholder="Пароль">
-        <button id="signup-btn">Зареєструватися</button>
+        <h1>Приєднуйся!</h1>
+        <input type="email" id="email" placeholder="Твій Email">
+        <input type="password" id="password" placeholder="Пароль (мін. 6 знаків)">
+        <button id="signup-btn">Створити акаунт</button>
         <p id="status"></p>
     </div>
 
     <script>
-        const supabaseUrl = 'https://diimxykjkbwyeynjyill.supabase.co';
-        const supabaseKey = 'sb_publishable_PRDZd3BCgnLA9qytEtTXzA_FTa8_QgF';
-        const client = supabase.createClient(supabaseUrl, supabaseKey);
-
-        const btn = document.getElementById('signup-btn');
-        
-        btn.addEventListener('click', async () => {
+        const client = supabase.createClient('https://diimxykjkbwyeynjyill.supabase.co', 'sb_publishable_PRDZd3BCgnLA9qytEtTXzA_FTa8_QgF');
+        document.getElementById('signup-btn').onclick = async () => {
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
-            
-            // Виконуємо реєстрацію
-            const { data, error } = await client.auth.signUp({ 
-                email: email, 
-                password: password 
-            });
-            
-            // ОБРОБКА РЕЗУЛЬТАТУ:
-            if (error) {
-                document.getElementById('status').innerText = "Помилка: " + error.message;
-            } else {
-                // ПЕРЕНАПРАВЛЕННЯ СЮДИ, ЯКЩО ВСЕ ДОБРЕ
-                window.location.href = 'dashboard.html';
-            }
-        });
+            const { error } = await client.auth.signUp({ email, password });
+            if (error) document.getElementById('status').innerText = "Помилка: " + error.message;
+            else window.location.href = 'dashboard.html';
+        };
     </script>
 </body>
 </html>
