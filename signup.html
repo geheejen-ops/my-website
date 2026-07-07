@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <title>Реєстрація</title>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f0f2f5; }
+        .card { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 300px; text-align: center; }
+        input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; }
+        button { width: 100%; padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 6px; cursor: pointer; }
+    </style>
 </head>
 <body>
 
@@ -16,35 +22,30 @@
     </div>
 
     <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const supabaseUrl = 'https://diimxykjkbwyeynjyill.supabase.co';
+            const supabaseKey = 'sb_publishable_PRDZd3BCgnLA9qytEtTXzA_FTa8_QgF';
+            const client = supabase.createClient(supabaseUrl, supabaseKey);
 
-    // Цей код чекає, поки завантажиться весь HTML
-    document.addEventListener('DOMContentLoaded', () => {
-        const supabaseUrl = 'https://diimxykjkbwyeynjyill.supabase.co';
-        const supabaseKey = 'sb_publishable_PRDZd3BCgnLA9qytEtTXzA_FTa8_QgF';
-        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
-
-        const btn = document.getElementById('signup-btn');
-        
-        btn.addEventListener('click', async () => {
-            console.log("Кнопка натиснута!"); // Тепер це має спрацювати!
+            const btn = document.getElementById('signup-btn');
             
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            
-            const { data, error } = await supabase.auth.signUp({ 
-                email: email, 
-                password: password 
+            btn.addEventListener('click', async () => {
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                
+                const { data, error } = await client.auth.signUp({ 
+                    email: email, 
+                    password: password 
+                });
+                
+                if (error) {
+                    document.getElementById('status').innerText = "Помилка: " + error.message;
+                } else {
+                    // Перенаправлення після успішної реєстрації
+                    window.location.href = 'dashboard.html';
+                }
             });
-            
-            if (error) {
-                console.error("Помилка Supabase:", error);
-                document.getElementById('status').innerText = "Помилка: " + error.message;
-            } else {
-                document.getElementById('status').innerText = "Перевір пошту для підтвердження!";
-            }
         });
-    });
-</script>
     </script>
 </body>
 </html>
